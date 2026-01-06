@@ -75,9 +75,8 @@ plugins {
 dependencies {
     implementation("app.cash.sqldelight:android-driver:2.0.0")
 }
+```
 
-
-```md
 ```kotlin
 sqldelight {
     databases {
@@ -86,13 +85,12 @@ sqldelight {
         }
     }
 }
-
+```
 
 ---
 
-## 🔹 Struktura projekta
+## Struktura projekta
 
-```md
 ```text
 app/
  ├─ src/main/java/com/example/sqldelightdemo
@@ -104,13 +102,12 @@ app/
  │   ├─ Song.sq
  │   └─ migrations/
  │       └─ 1.sqm
-
+```
 
 ---
 
-## 🔹 SQL shema in poizvedbe (`Song.sq`)
+## SQL shema in poizvedbe (`Song.sq`)
 
-```md
 ```sql
 CREATE TABLE song (
   id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
@@ -133,12 +130,12 @@ DELETE FROM song;
 insertWithId:
 INSERT INTO song(id, title, artist, mood)
 VALUES (?, ?, ?, ?);
+```
 
 ---
 
-## 🔹 Inicializacija baze (`DatabaseFactory.kt`)
+## Inicializacija baze (`DatabaseFactory.kt`)
 
-```md
 ```kotlin
 object DatabaseFactory {
 
@@ -151,36 +148,37 @@ object DatabaseFactory {
         return DemoDatabase(driver)
     }
 }
+```
 
 ---
 
-## 🔹 Uporaba baze v aplikaciji (`MainActivity.kt`)
+## Uporaba baze v aplikaciji (`MainActivity.kt`)
 
-```md
 ```kotlin
 val db = DatabaseFactory.create(this)
 val queries = db.songQueries
 
 queries.insertSong("Mask Off", "Future", "Chill")
 val songs = queries.selectAll().executeAsList()
+```
 
 ---
 
-## 🔹 Uporaba baze v aplikaciji (`MainActivity.kt`)
+## Uporaba baze v aplikaciji (`MainActivity.kt`)
 
-```md
 ```kotlin
 val db = DatabaseFactory.create(this)
 val queries = db.songQueries
 
 queries.insertSong("Mask Off", "Future", "Chill")
 val songs = queries.selectAll().executeAsList()
+```
 
 ---
 
-## 🔹 Migracija baze (`1.sqm`)
+## Migracija baze (`1.sqm`)
 
-```md
 ```sql
 ALTER TABLE song
 ADD COLUMN visited INTEGER NOT NULL DEFAULT 0;
+```
