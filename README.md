@@ -47,12 +47,12 @@ kjer ima SQLDelight več tisoč zvezdic (7600), kar nakazuje široko uporabo in
 zaupanje razvijalske skupnosti.
 
 ## Vzdrževanje (aktivnost projekta)
-- GitHub repozitorij prikazuje **177 contributors**. :contentReference[oaicite:5]{index=5}
-- Zadnji release: **2.2.1 (Nov 14, 2025)**. :contentReference[oaicite:6]{index=6}
+- GitHub repozitorij prikazuje **177 contributors**.
+- Zadnji release: **2.2.1 (Nov 14, 2025)**.}
 
 ---
 
-## 3) Časovna in prostorska zahtevnost (ocena)
+## Časovna in prostorska zahtevnost (ocena)
 
 SQLDelight sedi nad SQLite, zato je učinkovitost odvisna predvsem od:
 - strukture tabel, indeksov, query plana.
@@ -64,3 +64,123 @@ Tipično:
 - prostor: `O(n)` glede na število vrstic + indeksi.
 
 ---
+
+## Demo
+
+```kotlin
+plugins {
+    id("app.cash.sqldelight")
+}
+
+dependencies {
+    implementation("app.cash.sqldelight:android-driver:2.0.0")
+}
+
+
+```md
+```kotlin
+sqldelight {
+    databases {
+        create("DemoDatabase") {
+            packageName.set("com.example.sqldelightdemo.db")
+        }
+    }
+}
+
+
+---
+
+## 🔹 Struktura projekta
+
+```md
+```text
+app/
+ ├─ src/main/java/com/example/sqldelightdemo
+ │   ├─ MainActivity.kt
+ │   └─ db/
+ │       └─ DatabaseFactory.kt
+ │
+ ├─ src/main/sqldelight/com/example/sqldelightdemo/db
+ │   ├─ Song.sq
+ │   └─ migrations/
+ │       └─ 1.sqm
+
+
+---
+
+## 🔹 SQL shema in poizvedbe (`Song.sq`)
+
+```md
+```sql
+CREATE TABLE song (
+  id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+  title TEXT NOT NULL,
+  artist TEXT NOT NULL,
+  mood TEXT NOT NULL
+);
+
+insertSong:
+INSERT INTO song(title, artist, mood)
+VALUES (?, ?, ?);
+
+selectAll:
+SELECT * FROM song
+ORDER BY id DESC;
+
+deleteAll:
+DELETE FROM song;
+
+insertWithId:
+INSERT INTO song(id, title, artist, mood)
+VALUES (?, ?, ?, ?);
+
+---
+
+## 🔹 Inicializacija baze (`DatabaseFactory.kt`)
+
+```md
+```kotlin
+object DatabaseFactory {
+
+    fun create(context: Context): DemoDatabase {
+        val driver = AndroidSqliteDriver(
+            DemoDatabase.Schema,
+            context,
+            "demo.db"
+        )
+        return DemoDatabase(driver)
+    }
+}
+
+---
+
+## 🔹 Uporaba baze v aplikaciji (`MainActivity.kt`)
+
+```md
+```kotlin
+val db = DatabaseFactory.create(this)
+val queries = db.songQueries
+
+queries.insertSong("Mask Off", "Future", "Chill")
+val songs = queries.selectAll().executeAsList()
+
+---
+
+## 🔹 Uporaba baze v aplikaciji (`MainActivity.kt`)
+
+```md
+```kotlin
+val db = DatabaseFactory.create(this)
+val queries = db.songQueries
+
+queries.insertSong("Mask Off", "Future", "Chill")
+val songs = queries.selectAll().executeAsList()
+
+---
+
+## 🔹 Migracija baze (`1.sqm`)
+
+```md
+```sql
+ALTER TABLE song
+ADD COLUMN visited INTEGER NOT NULL DEFAULT 0;
