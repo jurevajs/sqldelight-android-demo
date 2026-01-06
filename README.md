@@ -179,4 +179,10 @@ try {
      alt="Zaslonski posnetek"
      width="200">
 
+### Uporaba v lastnem projektu
 
+Dostopno na: https://github.com/3-letnik-UN-2024-2025/pora-my-second-app-jurevajs
+
+<img src="https://github.com/user-attachments/assets/5982b8d3-fd71-4586-b702-04f1e72b10a7"
+     alt="Zaslonski posnetek"
+     width="200">
