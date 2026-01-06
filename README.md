@@ -7,8 +7,7 @@ in uporabo migracij baze podatkov.
 SQLDelight je odprtokodna knjižnica, ki jo razvija podjetje **Cash App**.
 Namenjena je delu z SQLite bazami in podpira več platform, med drugim tudi Android.
 
-**Uradni GitHub SQLDelight:** https://github.com/sqldelight/sqldelight :contentReference[oaicite:1]{index=1}
-
+**Uradni GitHub SQLDelight:** https://github.com/sqldelight/sqldelight
 ---
 
 ## Primernost in utemeljitev izbire tehnologije
@@ -39,13 +38,13 @@ Android build sistemom predstavlja primer platformno odvisnega razvoja.
 - Migracije moraš načrtovati sam (ampak so podprte)
 
 ## Licenca
-SQLDelight je pod **Apache 2.0**. :contentReference[oaicite:2]{index=2}
+SQLDelight je pod **Apache 2.0**.
 
 ## “Število uporabnikov” (indikatorji uporabe)
-- Maven Central za `app.cash.sqldelight:android-driver` kaže **Used in: 70 components** (odvisni projekti/komponente). :contentReference[oaicite:3]{index=3}
-- MvnRepository navaja **Used By: 118 artifacts** za android driver. :contentReference[oaicite:4]{index=4}
 
-> Opomba: to niso “končni uporabniki”, ampak indikator razširjenosti v ekosistemu.
+Število uporabnikov knjižnice lahko aproksimiramo s številom zvezdic na GitHubu,
+kjer ima SQLDelight več tisoč zvezdic (7600), kar nakazuje široko uporabo in
+zaupanje razvijalske skupnosti.
 
 ## Vzdrževanje (aktivnost projekta)
 - GitHub repozitorij prikazuje **177 contributors**. :contentReference[oaicite:5]{index=5}
@@ -63,7 +62,5 @@ Tipično:
 - brez indeksa: `O(n)` scan,
 - INSERT: `O(1)` amortizirano + strošek indeksov,
 - prostor: `O(n)` glede na število vrstic + indeksi.
-
-Overhead SQLDelight je majhen (generirana koda + driver), glavna cena je SQLite I/O.
 
 ---
