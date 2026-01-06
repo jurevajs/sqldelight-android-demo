@@ -67,6 +67,8 @@ Tipično:
 
 ## Demo
 
+### Uvoz knjižnice
+
 ```kotlin
 plugins {
     id("app.cash.sqldelight")
@@ -89,7 +91,7 @@ sqldelight {
 
 ---
 
-## Struktura projekta
+### Struktura projekta
 
 ```text
 app/
@@ -106,7 +108,7 @@ app/
 
 ---
 
-## SQL shema in poizvedbe (`Song.sq`)
+### SQL shema in poizvedbe (`Song.sq`)
 
 ```sql
 CREATE TABLE song (
@@ -134,7 +136,7 @@ VALUES (?, ?, ?, ?);
 
 ---
 
-## Inicializacija baze (`DatabaseFactory.kt`)
+### Inicializacija baze (`DatabaseFactory.kt`)
 
 ```kotlin
 object DatabaseFactory {
@@ -152,31 +154,19 @@ object DatabaseFactory {
 
 ---
 
-## Uporaba baze v aplikaciji (`MainActivity.kt`)
+### Uporaba baze v aplikaciji (`MainActivity.kt`)
 
 ```kotlin
 val db = DatabaseFactory.create(this)
 val queries = db.songQueries
 
-queries.insertSong("Mask Off", "Future", "Chill")
+queries.insertSong("Love Sosa", "Chief Keef", "Aggressive")
 val songs = queries.selectAll().executeAsList()
 ```
 
 ---
 
-## Uporaba baze v aplikaciji (`MainActivity.kt`)
-
-```kotlin
-val db = DatabaseFactory.create(this)
-val queries = db.songQueries
-
-queries.insertSong("Mask Off", "Future", "Chill")
-val songs = queries.selectAll().executeAsList()
-```
-
----
-
-## Migracija baze (`1.sqm`)
+### Migracija baze (`1.sqm`)
 
 ```sql
 ALTER TABLE song
