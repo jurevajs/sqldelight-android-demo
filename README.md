@@ -7,7 +7,7 @@ in uporabo migracij baze podatkov.
 SQLDelight je odprtokodna knjižnica, ki jo razvija podjetje **Cash App**.
 Namenjena je delu z SQLite bazami in podpira več platform, med drugim tudi Android.
 
-**Uradni GitHub SQLDelight:** https://github.com/sqldelight/sqldelight
+Uradni GitHub SQLDelight: https://github.com/sqldelight/sqldelight
 ---
 
 ## Primernost in utemeljitev izbire tehnologije
