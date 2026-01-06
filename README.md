@@ -9,8 +9,6 @@ Namenjena je delu z SQLite bazami in podpira več platform, med drugim tudi Andr
 
 Uradni GitHub SQLDelight: https://github.com/sqldelight/sqldelight
 
---
-
 ## Primernost in utemeljitev izbire tehnologije
 
 SQLDelight je primerna izbira za Android aplikacije, saj temelji na SQLite,
@@ -24,8 +22,6 @@ Knjižnica je bila izbrana, ker izboljša klasično uporabo SQLite:
 
 Zaradi uporabe Android-specifičnega SQLite driverja in integracije z
 Android build sistemom predstavlja primer platformno odvisnega razvoja.
-
---
 
 ## Prednosti
 - Type-safe API iz SQL (manj napak)
@@ -51,8 +47,6 @@ zaupanje razvijalske skupnosti.
 - GitHub repozitorij prikazuje **177 contributors**.
 - Zadnji release: **2.2.1 (Nov 14, 2025)**.}
 
---
-
 ## Časovna in prostorska zahtevnost (ocena)
 
 SQLDelight sedi nad SQLite, zato je učinkovitost odvisna predvsem od:
@@ -63,8 +57,6 @@ Tipično:
 - brez indeksa: `O(n)` scan,
 - INSERT: `O(1)` amortizirano + strošek indeksov,
 - prostor: `O(n)` glede na število vrstic + indeksi.
-
---
 
 ## Demo
 
@@ -90,8 +82,6 @@ sqldelight {
 }
 ```
 
----
-
 ### Struktura projekta
 
 ```text
@@ -106,8 +96,6 @@ app/
  │   └─ migrations/
  │       └─ 1.sqm
 ```
-
----
 
 ### SQL shema in poizvedbe (`Song.sq`)
 
@@ -135,8 +123,6 @@ INSERT INTO song(id, title, artist, mood)
 VALUES (?, ?, ?, ?);
 ```
 
----
-
 ### Inicializacija baze (`DatabaseFactory.kt`)
 
 ```kotlin
@@ -153,8 +139,6 @@ object DatabaseFactory {
 }
 ```
 
----
-
 ### Uporaba baze v aplikaciji (`MainActivity.kt`)
 
 ```kotlin
@@ -164,8 +148,6 @@ val queries = db.songQueries
 queries.insertSong("Love Sosa", "Chief Keef", "Aggressive")
 val songs = queries.selectAll().executeAsList()
 ```
-
----
 
 ### Migracija baze (`1.sqm`)
 
