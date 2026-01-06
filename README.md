@@ -157,5 +157,8 @@ ADD COLUMN visited INTEGER NOT NULL DEFAULT 0;
 ```
 ### Zaslonski posnetek
 
-![pora](https://github.com/user-attachments/assets/da6d4c77-4914-48fe-a172-bbeb22faaea8)
+<img src="https://github.com/user-attachments/assets/da6d4c77-4914-48fe-a172-bbeb22faaea8"
+     alt="Zaslonski posnetek"
+     width="400">
+
 
