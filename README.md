@@ -155,6 +155,24 @@ val songs = queries.selectAll().executeAsList()
 ALTER TABLE song
 ADD COLUMN visited INTEGER NOT NULL DEFAULT 0;
 ```
+
+### Obravnava izjem
+
+V aplikaciji je implementirana namerna sprožitev izjeme, ki predstavlja
+kršitev omejitve **PRIMARY KEY** v SQLite bazi podatkov.
+
+Izjema se sproži z vstavljanjem dveh zapisov z enakim identifikatorjem,
+kar povzroči napako na ravni baze podatkov.
+
+```kotlin
+try {
+    queries.insertWithId(1, "Duplicate", "Test", "Error")
+    queries.insertWithId(1, "Duplicate", "Test", "Error")
+} catch (e: Exception) {
+    txtOutput.text = "Napaka: ${e.message}"
+}
+```
+
 ### Zaslonski posnetek
 
 <img src="https://github.com/user-attachments/assets/da6d4c77-4914-48fe-a172-bbeb22faaea8"
