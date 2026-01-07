@@ -45,7 +45,7 @@ zaupanje razvijalske skupnosti.
 
 ## Vzdrževanje (aktivnost projekta)
 - GitHub repozitorij prikazuje **177 contributors**.
-- Zadnji release: **2.2.1 (Nov 14, 2025)**.}
+- Zadnji release: **2.2.1 (Nov 14, 2025)**
 
 ## Časovna in prostorska zahtevnost (ocena)
 
