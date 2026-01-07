@@ -32,12 +32,12 @@ Android build sistemom predstavlja primer platformno odvisnega razvoja.
 ## Slabosti
 - Potrebuješ znanje SQL
 - Ni ORM: več “ročnega” modeliranja (a več kontrole)
-- Migracije moraš načrtovati sam (ampak so podprte)
+- Migracije moraš načrtovati sam (a so podprte)
 
 ## Licenca
 SQLDelight je pod **Apache 2.0**.
 
-## “Število uporabnikov” (indikatorji uporabe)
+## Število uporabnikov
 
 Število uporabnikov knjižnice lahko aproksimiramo s številom zvezdic na GitHubu,
 kjer ima SQLDelight več tisoč zvezdic (7600), kar nakazuje široko uporabo in
@@ -54,9 +54,9 @@ SQLDelight sedi nad SQLite, zato je učinkovitost odvisna predvsem od:
 
 Tipično:
 - SELECT po indeksiranem stolpcu: približno `O(log n)` (B-tree indeks),
-- brez indeksa: `O(n)` scan,
-- INSERT: `O(1)` amortizirano + strošek indeksov,
-- prostor: `O(n)` glede na število vrstic + indeksi.
+- brez indeksa: `O(n)`
+- INSERT: `O(1)`
+- prostor: `O(n)` glede na število vrstic
 
 ## Demo
 
