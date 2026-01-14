@@ -31,8 +31,8 @@ Android build sistemom predstavlja primer platformno odvisnega razvoja.
 
 ## Slabosti
 - Potrebuješ znanje SQL
-- Ni ORM: več “ročnega” modeliranja (a več kontrole)
-- Migracije moraš načrtovati sam (a so podprte)
+- Ni ORM: več “ročnega” modeliranja
+- Migracije potrebno načrtovati sam
 
 ## Licenca
 SQLDelight je pod **Apache 2.0**.
