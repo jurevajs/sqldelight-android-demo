@@ -1,0 +1,15 @@
+CREATE TABLE artist (
+  name TEXT NOT NULL PRIMARY KEY,
+  country TEXT NOT NULL,
+  genre TEXT NOT NULL
+);
+
+insertArtist:
+INSERT OR REPLACE INTO artist(name, country, genre)
+VALUES (?, ?, ?);
+
+selectAllArtists:
+SELECT * FROM artist;
+
+deleteAllArtists:
+DELETE FROM artist;

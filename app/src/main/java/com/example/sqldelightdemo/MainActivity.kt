@@ -2,8 +2,11 @@ package com.example.sqldelightdemo
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
 import com.example.sqldelightdemo.databinding.ActivityMainBinding
-import com.example.sqldelightdemo.DatabaseFactory
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class MainActivity : AppCompatActivity() {
 
@@ -16,40 +19,65 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         val db = DatabaseFactory.create(this)
-        val queries = db.songQueries
+        val songQueries = db.songQueries
+        val artistQueries = db.artistQueries
 
         binding.btnInsert.setOnClickListener {
-            queries.transaction {
-                queries.insertSong("Mask Off", "Future", "Chill")
-                queries.insertSong("Hot", "Young Thug", "Energetic")
-                queries.insertSong("Love Sosa", "Chief Keef", "Aggressive")
+            lifecycleScope.launch(Dispatchers.IO) {
+                songQueries.transaction {
+                    artistQueries.insertArtist("Future", "USA", "Hip-Hop")
+                    artistQueries.insertArtist("Young Thug", "USA", "Hip-Hop")
+                    artistQueries.insertArtist("Chief Keef", "USA", "Drill")
+
+                    songQueries.insertSong("Mask Off", "Future", "Chill")
+                    songQueries.insertSong("Hot", "Young Thug", "Energetic")
+                    songQueries.insertSong("Love Sosa", "Chief Keef", "Aggressive")
+                }
+
+                withContext(Dispatchers.Main) {
+                    binding.txtOutput.text = "Inserted demo songs + artists."
+                }
             }
-            binding.txtOutput.text = "Inserted 3 demo songs."
         }
 
         binding.btnLoad.setOnClickListener {
-            val songs = queries.selectAll().executeAsList()
-            binding.txtOutput.text = songs.joinToString(separator = "\n") {
-                "${it.id}: ${it.title} — ${it.artist} (${it.mood})"
-            }.ifBlank { "(empty)" }
-        }
+            lifecycleScope.launch(Dispatchers.IO) {
+                val merged = songQueries.selectSongsWithArtist().executeAsList()
 
-        binding.btnDelete.setOnClickListener {
-            queries.deleteAll()
-            binding.txtOutput.text = "Deleted all songs."
-        }
+                val text = merged.joinToString("\n") {
+                    "${it.id}: ${it.title} — ${it.artist} (${it.artistCountry}, ${it.artistGenre}) [${it.mood}]"
+                }.ifBlank { "(empty)" }
 
-        binding.btnError.setOnClickListener {
-            try {
-                queries.insertWithId(1, "Duplicate Song", "Test Artist", "Error")
-                queries.insertWithId(1, "Duplicate Song", "Test Artist", "Error")
-
-                binding.txtOutput.text = "Unexpected: no error occurred"
-            } catch (e: Exception) {
-                binding.txtOutput.text =
-                    "Constraint error triggered:\n${e.javaClass.simpleName}\n${e.message}"
+                withContext(Dispatchers.Main) {
+                    binding.txtOutput.text = text
+                }
             }
         }
 
+        binding.btnDelete.setOnClickListener {
+            lifecycleScope.launch(Dispatchers.IO) {
+                songQueries.deleteAll()
+                withContext(Dispatchers.Main) {
+                    binding.txtOutput.text = "Deleted all songs."
+                }
+            }
+        }
+
+        binding.btnError.setOnClickListener {
+            lifecycleScope.launch(Dispatchers.IO) {
+                val text = try {
+                    songQueries.insertWithId(1, "Duplicate Song", "Test Artist", "Error")
+                    songQueries.insertWithId(1, "Duplicate Song", "Test Artist", "Error")
+                    "Unexpected: no error occurred"
+                } catch (e: Exception) {
+                    "Constraint error triggered:\n${e.javaClass.simpleName}\n${e.message}"
+                }
+
+                withContext(Dispatchers.Main) {
+                    binding.txtOutput.text = text
+                }
+            }
+        }
     }
 }
+
