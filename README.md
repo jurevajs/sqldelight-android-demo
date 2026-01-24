@@ -123,6 +123,22 @@ INSERT INTO song(id, title, artist, mood)
 VALUES (?, ?, ?, ?);
 ```
 
+### SQL JOIN (`Song.sq` in `Artist.sq`)
+
+```sql
+selectSongsWithArtist:
+SELECT
+  song.id,
+  song.title,
+  song.artist,
+  song.mood,
+  artist.country AS artistCountry,
+  artist.genre AS artistGenre
+FROM song
+JOIN artist ON artist.name = song.artist
+ORDER BY song.id DESC;
+```
+
 ### Inicializacija baze (`DatabaseFactory.kt`)
 
 ```kotlin
